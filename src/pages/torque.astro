@@ -29,8 +29,72 @@
             </nav>
     </head>
     <body>
-        <h1>Welcome to Torque</h1>
-        <p>Your content here</p>
+        <style>
+            /* ensure body is a positioned container for absolute overlay */
+            body {
+                position: relative;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            video {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+            }
+
+            /* overlay content centered over the video */
+            .overlay-content {
+                position: absolute;
+                inset: 0; /* top:0; right:0; bottom:0; left:0; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+                pointer-events: none; /* allow clicks to pass through if needed */
+                padding: 1rem;
+                text-align: center;
+                color: #fff;
+            }
+
+            .overlay-content h1,
+            .overlay-content p {
+                pointer-events: auto;
+            }
+
+            .overlay-content h1 {
+                font-size: clamp(2rem, 6vw, 4rem);
+                margin: 0 0 0.5rem 0;
+                text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+            }
+
+            .overlay-content p {
+                font-size: clamp(1rem, 2.5vw, 1.25rem);
+                margin: 0;
+                text-shadow: 0 3px 12px rgba(0,0,0,0.6);
+            }
+
+            /* ensure images below overlay (if any) don't cover it) */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
+        <video autoplay muted loop>
+            <source src="/IMG_1644.mp4" type="video/mp4" />
+        </video>
+
+        <!-- overlay wrapper: centers the heading and paragraph above the video -->
+        <div class="overlay-content" role="region" aria-label="Welcome">
+            <h1>Welcome to Torque</h1>
+            <p>Your content here</p>
+        </div>
+
         <img src="/corgi.jpg" alt="Torque Image" />
     </body>
 </html>
